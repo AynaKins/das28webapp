@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>WebApp test</title>
+  <meta charset="utf-8">
+  <title>Telegram WebApp test</title>
 </head>
 <body>
-    <h1>DAS28 WebApp test</h1>
-    <button onclick="sendToTelegram()">Отправить результат</button>
-    <script>
-        function sendToTelegram() {
-            if (window.Telegram && Telegram.WebApp) {
-                Telegram.WebApp.sendData(JSON.stringify({ test: 123 }));
-                alert("✅ WebApp API найден! Отправляем.");
-            } else {
-                alert("❌ WebApp API не найден!");
-            }
-        }
-        window.addEventListener('DOMContentLoaded', () => {
-            if (window.Telegram && Telegram.WebApp) {
-                Telegram.WebApp.ready();
-                document.body.style.background = "#e8fff2";
-            } else {
-                document.body.style.background = "#ffe8e8";
-            }
-        });
-    </script>
+  <h1>Test Telegram WebApp API</h1>
+  <button onclick="sendToTelegram()">Отправить в Telegram</button>
+  <div id="status"></div>
+  <script>
+    function sendToTelegram() {
+      if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.sendData(JSON.stringify({ test: 123 }));
+        document.getElementById("status").textContent = "✅ Данные отправлены!";
+      } else {
+        document.getElementById("status").textContent = "❌ WebApp API не найден!";
+        alert("❌ WebApp API не найден!");
+      }
+    }
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.ready();
+        document.body.style.background = "#e8fff2";
+      } else {
+        document.body.style.background = "#ffe8e8";
+      }
+    });
+  </script>
 </body>
 </html>
