@@ -5,19 +5,24 @@
   <title>Telegram WebApp test</title>
 </head>
 <body>
-  <h1>Test Telegram WebApp API</h1>
-  <button onclick="sendToTelegram()">Отправить в Telegram</button>
+  <h2>WebApp Demo: отправка в Telegram-бот</h2>
+  <button onclick="sendToTelegram()">Отправить тестовые данные</button>
   <div id="status"></div>
   <script>
     function sendToTelegram() {
       if (window.Telegram && Telegram.WebApp) {
-        Telegram.WebApp.sendData(JSON.stringify({ test: 123 }));
+        Telegram.WebApp.sendData(JSON.stringify({
+          action: "test_data",
+          number: 42,
+          str: "Это тест!"
+        }));
         document.getElementById("status").textContent = "✅ Данные отправлены!";
       } else {
         document.getElementById("status").textContent = "❌ WebApp API не найден!";
-        alert("❌ WebApp API не найден!");
+        alert("❌ WebApp API не найден! Откройте из Telegram-клиента через WebApp-кнопку.");
       }
     }
+
     window.addEventListener('DOMContentLoaded', function () {
       if (window.Telegram && Telegram.WebApp) {
         Telegram.WebApp.ready();
